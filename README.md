@@ -1,5 +1,12 @@
-# MovieCapstone
-Fandango Django project
-
 # Title
-Fandango Movie Project*
+Fandango Django project*
+
+# Project Overview
+
+# Functionality
+
+# Data Models
+
+# Schedule
+
+
