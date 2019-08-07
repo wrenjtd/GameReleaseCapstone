@@ -6,10 +6,10 @@ Uses IGDB database to allow users to keep track of new game releases from the pa
 
 
 # Functionality
-• Show a list of games releasing in the next 2 weeks
-• Have a "game of the day" that pulls from a list of games released that day. Shows cover art as a link to that game data
-• Have a search by each category  
-• Allows user to add games to a wish list and email it to themselves  
+• Show a list of games releasing in the next 2 weeks  
+• Have a "game of the day" that pulls from a list of games released that day. Shows cover art as a link to that game data  
+• Have a search by each category    
+• Allows user to add games to a wish list and email it to themselves    
 • User can opt into a newsletter system to receive monthly game release alerts  
 
 
