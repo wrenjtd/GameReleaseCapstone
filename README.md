@@ -1,22 +1,21 @@
 # Title
-Fandango Django project*
+Upcoming games project*
 
 # Project Overview
-Fandango API - Uses the Fandango API to show local movie times and allow the user to purcahse a ticket to a movie of their choosing.
+Uses IGDB database to allow users to keep track of new game releases from the past 30 days and games releasing in the next 2 weeks
 
 
 # Functionality
-• Show Movies in the area  
-• Show Movies and specify which area  
-• Show Movies in a specific area, show ticket info  
-• "" Show available seats  
-• User system so users can see their pending tickets and movie times
+• Show a list of games releasing in the next 2 weeks
+• Have a "game of the day" that pulls from a list of games released that day. Shows cover art as a link to that game data
+• Have a search by each category  
+• Allows user to add games to a wish list and email it to themselves  
+• User can opt into a newsletter system to receive monthly game release alerts  
+
 
 # Data Models
-Movies  
-Showtimes
+Game - Name, Developer, Publisher, Platform(s), Cover Art, Original Release Date
 
-**Theathers, editorial content
 
 # Schedule
 Broken up in order of functionality
