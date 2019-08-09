@@ -1,0 +1,48 @@
+<style>
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+    
+    td, th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+    
+    tr:nth-child(even) {
+        background-color: #dddddd;
+    }
+
+    #signin{
+        display: flex;
+        text-align: center;
+        justify-content: center;
+    }
+</style>
+
+<h2>Coming Soon:</h2>
+<a href="/movies/login" target="_blank"><button id = 'signin' >Sign In</button></a>
+<table>
+    <table>
+        <tr>
+            <th>Title</th>
+            <th>Cover Art</th>
+            <th>Publisher</th>
+            <th>Developer</th>
+            <th>Platform(s)</th>
+            <th>Release Date</th>
+        </tr>
+        <tr>
+        {% for game in current_games_list %}
+        <td>{{game.title}}</td>
+        <!-- <td>Pending</td> -->
+        <td><img src="{{game.cover_art_url}}" alt=""></td>
+        <td>{{game.publisher}}</td>
+        <td>{{game.developer}}</td>
+        <td>{{game.publisher}}</td>
+        <td>{{game.release_date}}</td>
+        </tr>
+        {% endfor %}
+</table>
