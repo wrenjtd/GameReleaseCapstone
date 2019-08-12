@@ -1,7 +1,10 @@
 from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, Http404
 from .models import Game, GamePlatform, Member
 from django.urls import reverse
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import User, Group
+from django.contrib.auth.decorators import login_required
 
 def index(request):
     current_games_list = Game.objects.order_by('title')
@@ -10,26 +13,43 @@ def index(request):
     }
     return render(request, 'moviesapp/index.html', context)
 
-def login(request):
-    return HttpResponse('Login:ok')
+def verify_user(request):
+    username = request.POST['username']
+    password = request.POST['password']
+    user = authenticate(request, username=username, password=password)
+    if user is not None:
+        login(request, user)
+        return HttpResponseRedirect(reverse('MoviesApp:index'))
+    else:
+        # raise Http404("Invalid user credentials!")
+        return HttpResponseRedirect(reverse('MoviesApp:login'))
 
-def logout(request):
-    return HttpResponse('Logout:ok')
+def mylogout(request):
+    logout(request)
+    return HttpResponseRedirect(reverse('MoviesApp:index'))
 
+@login_required
 def members(request):
-    return HttpResponse('WishList Page: ok')
+    # the_user = User.objects.
+    return render(request, 'moviesapp/members.html')
+    
+
+def login_page(request):
+      return render(request, 'moviesapp/login.html')    
 
 def create_user(request):
+    return render(request, 'moviesapp/create_user.html')
+
+
+def create_user_submission(request):
     m_username = request.POST['username']
     m_email = request.POST['member_email']
     m_birthday = request.POST['birthday']
     m_password = request.POST['password']
-    a_member = Member(username=m_username, email=m_email, birthday=m_birthday, password=m_password)
-    a_member.save()
     
+    a_member = User.objects.create_user(m_username,m_email,m_password)
+    group = Group.objects.get(name='Normal')
+    a_member.groups.add(group)
+    a_member.save()
     return HttpResponseRedirect(reverse('MoviesApp:members'))
-
-
-# def submit(request):
-
 # Create your views here.

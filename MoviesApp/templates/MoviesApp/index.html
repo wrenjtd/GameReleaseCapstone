@@ -15,27 +15,100 @@
         background-color: #dddddd;
     }
 
-    #signin{
+    /* #signin{
         display: flex;
         text-align: center;
         justify-content: center;
+    } */
+
+    
+    #cover{
+        position:fixed;
+        top:0;
+        left:0;
+        background:rgba(0,0,0,0.6);
+        z-index:5;
+        width:100%;
+        height:100%;
+        display:none;
+    }
+    #loginScreen{
+        height:380px;
+        width:340px;
+        margin:0 auto;
+        position: fixed;
+        z-index:10;
+        display:none;
+        background: rgb(245,245,245);
+        border:5px solid #cccccc;
+        border-radius:10px;
+        
+    }
+    #loginScreen:target, #loginScreen:target + #cover{
+        display:block;
+        opacity:1;
+    }
+    .cancel{
+        display:block;
+        position:absolute;
+        top:3px;
+        right:2px;
+        background:rgb(245,245,245);
+        color:black;
+        height:30px;
+        width:35px;
+        font-size:30px;
+        text-decoration:none;
+        text-align:center;
+        font-weight:bold;
     }
 </style>
 
-<h2>Coming Soon:</h2>
-<a href="/movies/login" target="_blank"><button id = 'signin' >Sign In</button></a>
+<body>
+    <div id="page_headline" align="middle">
+    <h2>Coming Soon:</h2>
+    </div>
+    {% if user.is_authenticated %}
+        <a href="/movies/logout"><button id = 'logout' >Log out</button></a><br>
+        <a href="/movies/members"><button id = 'members' >Members</button></a><br>
+    {% else %}
+    <div id ="log_in_portion" align="right">
+    <a href="#loginScreen"><button id = 'login'>Log in</button></a>
+    </div>
+    {% endif %}
+
+
+    <div id="loginScreen" align="center">
+        <div id="login_text">
+            <a href="" class="cancel">&times;</a><br>
+            <form action ="verify_user/" method="post">
+                {% csrf_token %}
+                <h2>Sign in:</h2><br>
+                <span>Username:     </span>
+                    <a href="/movies/create_user" >Register</a><br>
+                <input type="text" name="username" placeholder="Not a Bot"/><br>
+                Password: <br>
+                <input type="password" name="password"/><br>
+                
+                <input type="submit" value="Submit"/>
+            </form>
+        </div>
+    </div>
+    <div id="cover" >
+    </div>
+
+
 <table>
-    <table>
-        <tr>
-            <th>Title</th>
-            <th>Cover Art</th>
-            <th>Publisher</th>
-            <th>Developer</th>
-            <th>Platform(s)</th>
-            <th>Release Date</th>
-        </tr>
-        <tr>
-        {% for game in current_games_list %}
+    <tr>
+        <th>Title</th>
+        <th>Cover Art</th>
+        <th>Publisher</th>
+        <th>Developer</th>
+        <th>Platform(s)</th>
+        <th>Release Date</th>
+    </tr>
+    <tr>
+    {% for game in current_games_list %}
         <td>{{game.title}}</td>
         <!-- <td>Pending</td> -->
         <td><img src="{{game.cover_art_url}}" alt=""></td>
@@ -43,6 +116,11 @@
         <td>{{game.developer}}</td>
         <td>{{game.publisher}}</td>
         <td>{{game.release_date}}</td>
-        </tr>
-        {% endfor %}
+    </tr>
+    {% endfor %}
 </table>
+
+
+    
+    
+</body>
